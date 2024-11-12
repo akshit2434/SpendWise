@@ -5,24 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpendWise</title>
+
+    <link rel="stylesheet" href="styles/lib.css">
     <link rel="stylesheet" href="styles/home.css">
+    <!-- <script src="index.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- jQuery Modal
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
+
+    <script src="scripts/home.js"></script>
 </head>
 
 <body>
+    <div class="loader"></div>
     <div class="wrapper default-1">
-        <h1 class="intro white-1">Hello, <span class="name">Akshit</span>!</h1>
-        <div class="frosted card balancecard">
+        <h1 class="intro white-1">Hello, <span class="userNameJS">name</span>!</h1>
+        <div class="frosted card balancecard host-grotesk">
             <h2 class="grey-1">Current Balance</h2>
-            <h1 class="curbal green-1">₹10,634.25</h1>
+            <h1 class="curbal green-1 balanceJS">₹error</h1>
             <div class="sub-balance grey-1">
-                <div class="upi"><span class="balance">₹7,120</span><span class="label">UPI</span></div>
-                <div class="cash"><span class="balance">₹2,470</span><span class="label">CASH</span></div>
+                <div class="upi"><span class="balance upiBalJS">₹7,120</span><span class="label">UPI</span></div>
+                <div class="cash"><span class="balance cashBalJS">₹2,470</span><span class="label">CASH</span></div>
             </div>
         </div>
 
         <div class="frosted card quote-box">
-            <h2 class="budget grey-2 prog"><span class="red-1">51%</span> of budget used.</h2>
-            <h2 class="month grey-2 prog">43% of the month over.</h2>
+            <h2 class="budget grey-3 prog"><span class="red-1">51%</span> of budget used.</h2>
+            <h2 class="month grey-3 prog">43% of the month over.</h2>
             <div class="card quote frosted">
                 <span class="text">"A rupee saved is a rupee earned."</span>
                 <span class="credits grey-3">-SpendWise</span>
@@ -31,6 +42,40 @@
             <img src="assets/SpendWise_squi.png" alt="" />
         </div>
     </div>
+
+    <div class="b-menu poppins">
+        <div class="history btn-1 ">
+            <i data-lucide="history"></i>
+        </div>
+        <div class="add-trans">
+            <i data-lucide="plus"></i>
+        </div>
+        <div class="dues btn-1 ">
+            <i data-lucide="wallet"></i>
+        </div>
+    </div>
+
+    <div class="add-trans-box modal frosted white-1 host-grotesk">
+        <i data-lucide="x" class="close"></i>
+        <div class="btns-1">
+            <div class="plus"><i data-lucide="plus"></i></div>
+            <div class="minus active"><i data-lucide="minus"></i></div>
+        </div>
+        <div>
+            <input type="text" placeholder="0.00">
+        </div>
+        <div class="btns-2">
+            <div class="cancel">Cancel</div>
+            <div class="add">Add</div>
+        </div>
+    </div>
+
+    <div class="popup-overlay"></div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
