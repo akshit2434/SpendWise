@@ -13,9 +13,10 @@ fetch('http://' + ip + ':3000/api/users')
     });
 
 function update_elements() {
-    var perMonth = getPercentageOfMonthPassed();
-    var perBudget = Math.floor(100 * (currUser.currentBalance / currUser.budgetPerMonth));
-    console.log(currUser.currentBalance, currUser.budgetPerMonth, perBudget)
+    const perMonth = getPercentageOfMonthPassed();
+    const perBudget = Math.floor(100 * (currUser.todaySpendings / currUser.budgetPerMonth));
+    const budget = currUser.weekdayBudget;
+    console.log(currUser.todaySpendings, currUser.budgetPerMonth, perBudget)
     $(".budget span").html(perBudget + "%");
     if (perBudget <= perMonth) {
         $(".budget span").removeClass("red-1").addClass("green-1");
@@ -23,12 +24,39 @@ function update_elements() {
     $(".month span").html(perMonth + "%");
     $(".loader").fadeOut();
     $(".userNameJS").html(currUser.name);
-    $(".balanceJS").html("₹" + currUser.currentBalance);
-    $(".upiBalJS").html("₹" + Math.floor(currUser.upiBalance));
-    $(".cashBalJS").html("₹" + Math.floor(currUser.cashBalance));
+    $(".balanceJS").html("₹" + currUser.todaySpendings);
+    if (currUser.upiSpendings <= .9 * budget) {
+        $(".curbal.balanceJS").removeClass("red-1").removeClass("yellow-1").addClass("green-1");
+    } else if (currUser.upiSpendings >= 1 * budget) {
+        $(".curbal.balanceJS").removeClass("green-1").removeClass("yellow-1").addClass("red-1");
+    } else {
+        $(".curbal.balanceJS").removeClass("red-1").removeClass("green-1").addClass("yellow-1");
+    }
+    $(".upiBalJS").html("₹" + Math.floor(currUser.upiSpendings));
+    $(".cashBalJS").html("₹" + Math.floor(currUser.cashSpendings));
+    $(".daily-budgetJS").html("₹" + Math.floor(budget))
 
     main();
 }
+
+function setWaterLevel(percentage) {
+    var $water = $('#water');
+    var containerHeight = $('#water-container').height();
+
+    // Calculate height based on percentage and container height
+    var height = (percentage / 100) * containerHeight;
+
+    // Set the height of the water div
+    $water.css('transform', 'translateY(' + (100 - percentage) + '%)');
+}
+
+// Example usage: Fill the water to 50%
+$(document).ready(function () {
+    setWaterLevel(50);
+});
+
+
+
 
 function main() {
     $(".b-menu .history").click(function () {
@@ -52,7 +80,6 @@ function main() {
         $(".add-trans-box").animate({ opacity: 0, marginTop: "100px" }, 300);
         $(".popup-overlay").fadeOut("fast");
         $(".add-trans-box").hide();
-        console.log("close");
     });
 
     $(".add-trans-box .plus").click(function () {
@@ -91,7 +118,9 @@ function main() {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Transaction successful:');
+                $(".add-trans-box").animate({ opacity: 0, marginTop: "100px" }, 500);
+                $(".popup-overlay").fadeOut();
+                $(".add-trans-box").hide();
                 refresh();
             })
             .catch(error => {

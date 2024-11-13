@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.get('/api/users', async (req, res) => {
   try {
+
     const users = await User.find();
     res.json(users[0]);
   } catch (err) {
@@ -30,8 +31,8 @@ app.post('/api/update-balance', async (req, res) => {
       return res.status(404).send('User not found');
     }
 
-    user.currentBalance += amount;
-    if (pay_type == "UPI") user.upiBalance += amount; else user.cashBalance += amount;
+    user.todaySpendings -= amount;
+    if (pay_type == "UPI") user.upiSpendings -= amount; else user.cashSpendings -= amount;
     user.transactions.push({ amount, title, description, pay_type });
     await user.save();
 
@@ -54,9 +55,9 @@ app.post('/api/update-dues', async (req, res) => {
 
     // amount *= -1;
 
-    user.currentBalance += amount;
+    // user.currentBalance += amount;
 
-    if (pay_type == "UPI") user.upiBalance += amount; else user.cashBalance += amount;
+    // if (pay_type == "UPI") user.upiBalance += amount; else user.cashBalance += amount;
     user.transactions.push({ amount, title, description, pay_type });
 
     var flag = 0;
@@ -106,10 +107,13 @@ const UserSchema = new mongoose.Schema({
   email: String,
   age: Number,
   // ... other user details
-  currentBalance: Number,
-  upiBalance: Number,
-  cashBalance: Number,
+  todaySpendings: Number,
+  upiSpendings: Number,
+  cashSpendings: Number,
   budgetPerMonth: Number,
+  weekdayBudget: Number,
+  weekendBudget: Number,
+  dailyavg: Number,
   transactions: [
     {
       amount: Number,
@@ -143,10 +147,12 @@ const newUser = new User({
   name: 'Test123',
   age: 23,
   email: 'test123@gmail.com',
-  currentBalance: 0,
-  upiBalance: 0,
-  cashBalance: 0,
-  budgetPerMonth: 10000
+  todaySpendings: 0,
+  upiSpendings: 0,
+  cashSpendings: 0,
+  budgetPerMonth: 10000,
+  weekdayBudget: 150,
+  weekendBudget: 80
 });
 
 // newUser.save()
