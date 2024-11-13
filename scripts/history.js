@@ -106,7 +106,9 @@ function main() {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Transaction successful:');
+                $(".add-trans-box").animate({ opacity: 0, marginTop: "100px" }, 300);
+                $(".popup-overlay").fadeOut("fast");
+                $(".add-trans-box").hide();
                 refresh();
             })
             .catch(error => {

@@ -59,6 +59,10 @@ $(document).ready(function () {
 
 
 function main() {
+
+
+
+
     $(".b-menu .history").click(function () {
         window.location = 'http://' + ip + ':5500/history.html';
     });
@@ -157,4 +161,19 @@ function refresh() {
             $(".loader").html("<h1>An Error Occured</h1>");
         });
 }
+
+$(document).ready(function () {
+    var app = document.getElementById('auto-quote');
+
+    var typewriter = new Typewriter(app, {
+        // loop: true,
+        delay: 60,
+        cursor: ""
+    });
+
+    typewriter
+        .pauseFor(1000)
+        .typeString('A rupee saved is a rupee earned!')
+        .start();
+})
 

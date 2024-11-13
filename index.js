@@ -144,7 +144,7 @@ const User = mongoose.model('User', UserSchema);
 
 // Create a new user document
 const newUser = new User({
-  name: 'Test123',
+  name: 'Akshit',
   age: 23,
   email: 'test123@gmail.com',
   todaySpendings: 0,
@@ -155,6 +155,6 @@ const newUser = new User({
   weekendBudget: 80
 });
 
-// newUser.save()
-//   .then(user => console.log('User created:', user))
-//   .catch(err => console.error(err));
+newUser.save()
+  .then(user => console.log('User created:', user))
+  .catch(err => console.error(err));
