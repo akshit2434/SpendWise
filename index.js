@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000; // Your backend port
 
 app.use(cors()); // Enable CORS for all routes
+app.use(express.json());
+
 
 app.get('/api/users', async (req, res) => {
   try {
@@ -16,6 +19,34 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
+
+app.post('/api/update-balance', async (req, res) => {
+  console.log(req.body);
+  const { userId, amount } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    user.currentBalance += amount;
+    user.upiBalance += amount;
+    user.transactions.push({ amount });
+    await user.save();
+
+    res.json({ success: true, user });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+;
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
@@ -39,10 +70,12 @@ const UserSchema = new mongoose.Schema({
   currentBalance: Number,
   upiBalance: Number,
   cashBalance: Number,
+  budgetPerMonth: Number,
   transactions: [
     {
       amount: Number,
-      payDate: Date,
+      date: { type: Date, default: Date.now },
+      title: { type: String, default: "Daily Payments" }
     }
   ]
 
@@ -55,9 +88,10 @@ const newUser = new User({
   name: 'Test123',
   age: 23,
   email: 'test123@gmail.com',
-  currentBalance: 7123.01,
-  upiBalance: 3500,
-  cashBalance: 3623.01
+  currentBalance: 0,
+  upiBalance: 0,
+  cashBalance: 0,
+  budgetPerMonth: 10000
 });
 
 // newUser.save()

@@ -26,14 +26,14 @@
             <h2 class="grey-1">Current Balance</h2>
             <h1 class="curbal green-1 balanceJS">₹error</h1>
             <div class="sub-balance grey-1">
-                <div class="upi"><span class="balance upiBalJS">₹7,120</span><span class="label">UPI</span></div>
-                <div class="cash"><span class="balance cashBalJS">₹2,470</span><span class="label">CASH</span></div>
+                <div class="upi"><span class="balance upiBalJS">error</span><span class="label">UPI</span></div>
+                <div class="cash"><span class="balance cashBalJS">error</span><span class="label">CASH</span></div>
             </div>
         </div>
 
         <div class="frosted card quote-box">
-            <h2 class="budget grey-3 prog"><span class="red-1">51%</span> of budget used.</h2>
-            <h2 class="month grey-3 prog">43% of the month over.</h2>
+            <h2 class="budget grey-3 prog"><span class="monthp red-1">0!%</span> of budget used.</h2>
+            <h2 class="month grey-3 prog"><span>0!%</span> of the month over.</h2>
             <div class="card quote frosted">
                 <span class="text">"A rupee saved is a rupee earned."</span>
                 <span class="credits grey-3">-SpendWise</span>
@@ -50,24 +50,26 @@
         <div class="add-trans">
             <i data-lucide="plus"></i>
         </div>
-        <div class="dues btn-1 ">
-            <i data-lucide="wallet"></i>
+        <div class="home btn-1 ">
+            <i data-lucide="house"></i>
         </div>
     </div>
 
     <div class="add-trans-box modal frosted white-1 host-grotesk">
         <i data-lucide="x" class="close"></i>
+
         <div class="btns-1">
             <div class="plus"><i data-lucide="plus"></i></div>
             <div class="minus active"><i data-lucide="minus"></i></div>
         </div>
-        <div>
-            <input type="text" placeholder="0.00">
-        </div>
-        <div class="btns-2">
-            <div class="cancel">Cancel</div>
-            <div class="add">Add</div>
-        </div>
+        <form id="add-trans-form">
+            <div>
+                <input type="number" placeholder="0.00" min="0.01" step="0.01" required>
+            </div>
+            <div class="btns-2">
+                <button type="reset" class="cancel">Cancel</button>
+                <button type="submit" class="add">Add</button>
+            </div>
     </div>
 
     <div class="popup-overlay"></div>
