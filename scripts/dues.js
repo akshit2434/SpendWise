@@ -1,12 +1,14 @@
-var ip = "192.168.29.4";
+const ip = "192.168.29.4";
+// const ip = "192.168.95.69";
 var currUser;
-var ip = "192.168.29.4";
+
 fetch('http://' + ip + ':3000/api/users')
     .then(response => response.json())
     .then(data => {
         currUser = data;
         // Handle the data received from backend
         update_elements();
+        main();
     })
     .catch(err => {
         console.error('Error fetching data:', err);
@@ -40,7 +42,6 @@ function update_elements() {
         $(".wrapper").html($(".wrapper").html() + "<h1>No Dues...</h1>");
     }
     $(".loader").fadeOut();
-    main();
 }
 
 function main() {

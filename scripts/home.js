@@ -1,11 +1,13 @@
 var currUser;
-var ip = "192.168.29.4";
+const ip = "192.168.29.4";
+// const ip = "192.168.95.69";
 fetch('http://' + ip + ':3000/api/users')
     .then(response => response.json())
     .then(data => {
         currUser = data;
         // Handle the data received from backend
         update_elements();
+        main();
     })
     .catch(err => {
         console.error('Error fetching data:', err);
@@ -36,7 +38,6 @@ function update_elements() {
     $(".cashBalJS").html("₹" + Math.floor(currUser.cashSpendings));
     $(".daily-budgetJS").html("₹" + Math.floor(budget))
 
-    main();
 }
 
 function setWaterLevel(percentage) {
@@ -95,10 +96,8 @@ function main() {
         $(".add-trans-box .minus").addClass("active");
         $(".add-trans-box .plus").removeClass("active");
     });
-
     document.getElementById('add-trans-form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
-
         var amount = parseFloat($("#add-trans-form input").val());
         const title = $("#add-trans-form #title").val();
         const description = $("#add-trans-form #desc").val();
@@ -132,7 +131,6 @@ function main() {
                 alert('An error occurred. Please try again.');
             });
     });
-
 }
 
 function getPercentageOfMonthPassed() {

@@ -113,6 +113,7 @@ body {
 
 .b-menu {
     position: fixed;
+    z-index: 100;
     bottom: 0;
     background-color: rgb(22, 22, 22);
     box-shadow:

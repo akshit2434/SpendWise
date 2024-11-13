@@ -97,7 +97,7 @@ app.listen(port, () => {
 const mongoURI = 'mongodb+srv://spendwise:spendwise2434@cluster0.wepia.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
+  .then(main)
   .catch(err => console.error(err));
 
 // Define a simple schema
@@ -155,6 +155,10 @@ const newUser = new User({
   weekendBudget: 80
 });
 
-newUser.save()
-  .then(user => console.log('User created:', user))
-  .catch(err => console.error(err));
+async function main() {
+  console.log("Mongo DB Connected");
+  await User.deleteMany({});
+  newUser.save()
+    .then(user => console.log('User created:', user))
+    .catch(err => console.error(err));
+}
