@@ -25,6 +25,7 @@ function formatDate(date) {
 
 function update_elements() {
     var x = 0;
+    $(".wrapper").html("<h1>Transaction History</h1><hr><br><br></br>");
     for (var trans of currUser.transactions) {
         x++;
         var amount = trans.amount;
@@ -116,6 +117,7 @@ function refresh() {
         .then(response => response.json())
         .then(data => {
             currUser = data;
+            update_elements();
         })
         .catch(err => {
             console.error('Error fetching data:', err);

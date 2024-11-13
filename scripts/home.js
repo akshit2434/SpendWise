@@ -14,7 +14,8 @@ fetch('http://' + ip + ':3000/api/users')
 
 function update_elements() {
     var perMonth = getPercentageOfMonthPassed();
-    var perBudget = Math.floor(100 * (1 - currUser.currentBalance / currUser.budgetPerMonth));
+    var perBudget = Math.floor(100 * (currUser.currentBalance / currUser.budgetPerMonth));
+    console.log(currUser.currentBalance, currUser.budgetPerMonth, perBudget)
     $(".budget span").html(perBudget + "%");
     if (perBudget <= perMonth) {
         $(".budget span").removeClass("red-1").addClass("green-1");
@@ -60,14 +61,6 @@ function main() {
         $(".add-trans-box .minus").addClass("active");
         $(".add-trans-box .plus").removeClass("active");
     });
-    var perMonth = getPercentageOfMonthPassed();
-    var perBudget = Math.floor(100 * (1 - currUser.currentBalance / currUser.budgetPerMonth));
-    $(".budget span").html(perBudget + "%");
-    if (perBudget <= perMonth) {
-        $(".budget span").removeClass("red-1").addClass("green-1");
-    }
-    $(".month span").html(perMonth + "%");
-
 
     document.getElementById('add-trans-form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
