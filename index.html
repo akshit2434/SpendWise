@@ -50,8 +50,8 @@
         <div class="add-trans">
             <i data-lucide="plus"></i>
         </div>
-        <div class="home btn-1 ">
-            <i data-lucide="house"></i>
+        <div class="dues btn-1 ">
+            <i data-lucide="wallet"></i>
         </div>
     </div>
 
@@ -64,7 +64,16 @@
         </div>
         <form id="add-trans-form">
             <div>
+                <textarea id="title" placeholder="Title: Daily Payment..."></textarea>
                 <input type="number" placeholder="0.00" min="0.01" step="0.01" required>
+
+                <textarea id="desc" placeholder="Enter description..."></textarea>
+            </div>
+            <div class="paymethod">
+                <label for="options">Payment Mode:</label> <select id="options" name="options" required>
+                    <option value="UPI" selected>UPI</option>
+                    <option value="Cash">Cash</option>
+                </select>
             </div>
             <div class="btns-2">
                 <button type="reset" class="cancel">Cancel</button>

@@ -50,6 +50,9 @@ function main() {
     $(".b-menu .home").click(function () {
         window.location = 'http://' + ip + ':5500/index.html';
     });
+    $(".b-menu .dues").click(function () {
+        window.location = 'http://' + ip + ':5500/dues.html';
+    });
 
     const userId = currUser._id;
     $(".add-trans").click(function () {
@@ -81,7 +84,9 @@ function main() {
         event.preventDefault(); // Prevent the default form submission
 
         var amount = parseFloat($("#add-trans-form input").val());
-
+        const title = $("#add-trans-form #title").val();
+        const description = $("#add-trans-form #desc").val();
+        const pay_type = $("#add-trans-form #options").val();
 
         if (isNaN(amount) || amount <= 0) {
             alert('Please enter a valid transaction amount. ' + amount);
@@ -90,13 +95,14 @@ function main() {
         if ($(".add-trans-box .minus").hasClass("active")) amount *= -1;
         // Assuming you have the user's ID available as `userId`
 
-        console.log(JSON.stringify({ userId, amount }));
+        const data_json = JSON.stringify({ userId, amount, title, description, pay_type });
+        console.log(data_json);
         fetch('http://' + ip + ':3000/api/update-balance', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId, amount })
+            body: data_json
         })
             .then(response => response.json())
             .then(data => {

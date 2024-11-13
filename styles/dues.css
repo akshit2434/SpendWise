@@ -11,7 +11,7 @@
 }
 .wrapper .transaction {
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 10px 30px;
   margin-bottom: 30px;
   border: 0;
   box-shadow: 8px 8px 0 #0e0e11, -8px -8px 0 #303037;
@@ -33,4 +33,4 @@
   margin-left: 20px;
   width: 2rem;
   height: 2rem;
-}/*# sourceMappingURL=history.css.map */
+}/*# sourceMappingURL=dues.css.map */

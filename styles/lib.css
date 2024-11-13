@@ -145,4 +145,140 @@ body {
   margin: auto;
   margin-top: 50%;
   transform: translateY(-50%);
+}
+
+.add-trans-box {
+  min-height: 200px;
+  min-width: 70%;
+  max-width: 95%;
+  z-index: 950;
+  padding: 20px;
+  font-size: 3rem;
+}
+.add-trans-box .sec-1 {
+  margin-bottom: 20px;
+}
+.add-trans-box .btns-1 {
+  display: inline-block;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.add-trans-box .btns-1 div {
+  display: inline-block;
+  padding: 10px;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 200px;
+  display: inline-block;
+  background-color: #1c1c20;
+  box-shadow: 2px 2px 5px #0e0e11, -2px -2px 5px #303037;
+  transition: all 0.1s ease;
+  border: 2px solid rgba(0, 0, 0, 0.336);
+}
+.add-trans-box .btns-1 div.plus.active {
+  background-color: #2b3b32;
+  box-shadow: 2px 2px 5px #1f2a24, -2px -2px 5px #374c41;
+}
+.add-trans-box .btns-1 div.minus.active {
+  background-color: #612828;
+  box-shadow: 2px 2px 5px #451c1c, -2px -2px 5px #702e2e;
+}
+.add-trans-box .btns-1 div svg {
+  transform: translateY(-70%);
+}
+.add-trans-box input {
+  display: inline-block;
+  color: #c2c2c2;
+  background-color: #1c1c20;
+  border: 2px solid rgba(110, 110, 110, 0);
+  width: 100%;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 3rem;
+  box-shadow: inset 4px 4px 0 #0e0e11, -4px -4px 0 #303037;
+  transition: all 0.2s ease;
+}
+.add-trans-box input:active, .add-trans-box input:focus {
+  border: 2px solid rgb(31, 40, 56);
+  outline: none;
+}
+.add-trans-box textarea {
+  color: #c2c2c2;
+  background-color: #1c1c20;
+  border: 2px solid rgba(110, 110, 110, 0);
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 15px 0;
+  resize: none;
+  box-shadow: inset 4px 4px 0 #0e0e11, -4px -4px 0 #303037;
+  transition: all 0.2s ease;
+}
+.add-trans-box textarea:active, .add-trans-box textarea:focus {
+  border: 2px solid rgb(31, 40, 56);
+  outline: none;
+}
+.add-trans-box .paymethod {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.add-trans-box .paymethod label {
+  font-size: 1.2rem;
+}
+.add-trans-box .paymethod select {
+  color: #c2c2c2;
+  background-color: #1c1c20;
+  border: 2px solid rgba(110, 110, 110, 0);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px 0;
+  box-shadow: inset 4px 4px 0 #0e0e11, -4px -4px 0 #303037;
+  transition: all 0.2s ease;
+}
+.add-trans-box .paymethod select:active, .add-trans-box .paymethod select:focus {
+  border: 2px solid rgb(31, 40, 56);
+  outline: none;
+}
+.add-trans-box .paymethod select option {
+  color: #c2c2c2;
+  background-color: #1c1c20;
+  border: 0px solid rgb(110, 110, 110);
+  border-radius: 10px;
+  font-size: 1rem;
+  box-shadow: inset 4px 4px 0 #0e0e11, -4px -4px 0 #303037;
+}
+.add-trans-box .btns-2 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+.add-trans-box .btns-2 div,
+.add-trans-box .btns-2 button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  background-color: #1c1c20;
+  border: 0;
+  color: #c2c2c2;
+  font-family: Host Grotesk;
+  text-decoration: none;
+  font-size: 1.5rem;
+  box-shadow: 2px 2px 0 #0e0e11, -2px -2px 0 #303037;
+}
+
+.default-1 {
+  color: #c2c2c2;
+  font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+  background-color: #1f1f24;
+  min-height: 100vh;
+  padding: 20px;
 }/*# sourceMappingURL=lib.css.map */

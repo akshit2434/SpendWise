@@ -1,3 +1,4 @@
+var ip = "192.168.29.4";
 var currUser;
 var ip = "192.168.29.4";
 fetch('http://' + ip + ':3000/api/users')
@@ -12,21 +13,33 @@ fetch('http://' + ip + ':3000/api/users')
         $(".loader").html("<h1>An Error Occured</h1>");
     });
 
-function update_elements() {
-    var perMonth = getPercentageOfMonthPassed();
-    var perBudget = Math.floor(100 * (currUser.currentBalance / currUser.budgetPerMonth));
-    console.log(currUser.currentBalance, currUser.budgetPerMonth, perBudget)
-    $(".budget span").html(perBudget + "%");
-    if (perBudget <= perMonth) {
-        $(".budget span").removeClass("red-1").addClass("green-1");
-    }
-    $(".month span").html(perMonth + "%");
-    $(".loader").fadeOut();
-    $(".userNameJS").html(currUser.name);
-    $(".balanceJS").html("₹" + currUser.currentBalance);
-    $(".upiBalJS").html("₹" + Math.floor(currUser.upiBalance));
-    $(".cashBalJS").html("₹" + Math.floor(currUser.cashBalance));
+function formatDate(date) {
+    date = new Date(date);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
 
+    return `${day}/${month}/${year}`;
+
+}
+
+function update_elements() {
+    var x = 0;
+    $(".wrapper").html("<h1>Dues</h1><hr><br><br></br>");
+    for (var person of currUser.dues) {
+        x++;
+        var amount = person.balance;
+        var color = (amount < 0) ? "green" : "red";
+        if (amount < 0) amount *= -1;
+        var sign = (color == "green") ? "Take " : "Give ";
+        var title = person.name;
+        // var date = formatDate(person.date);
+        $(".wrapper").html($(".wrapper").html() + '<div class="transaction frosted white-1"><span class="amount ' + color + '-1">' + sign + "₹" + amount + "</span><i data-lucide='circle-user-round'></i><div><span class='name'>" + title + "</span></div></div>");
+    }
+    if (x == 0) {
+        $(".wrapper").html($(".wrapper").html() + "<h1>No Dues...</h1>");
+    }
+    $(".loader").fadeOut();
     main();
 }
 
@@ -65,6 +78,8 @@ function main() {
         $(".add-trans-box .plus").removeClass("active");
     });
 
+
+
     document.getElementById('add-trans-form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
 
@@ -82,7 +97,7 @@ function main() {
 
         const data_json = JSON.stringify({ userId, amount, title, description, pay_type });
         console.log(data_json);
-        fetch('http://' + ip + ':3000/api/update-balance', {
+        fetch('http://' + ip + ':3000/api/update-dues', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,19 +117,6 @@ function main() {
 
 }
 
-function getPercentageOfMonthPassed() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    const totalDaysInMonth = (lastDayOfMonth - firstDayOfMonth) / (1000 * 60 * 60 * 24) + 1;
-    const daysPassed = (currentDate - firstDayOfMonth) / (1000 * 60 * 60 * 24) + 1;
-    const percentagePassed = (daysPassed / totalDaysInMonth) * 100;
-
-    return percentagePassed.toFixed(0);
-}
-
 function refresh() {
 
     fetch('http://' + ip + ':3000/api/users')
@@ -127,5 +129,7 @@ function refresh() {
             console.error('Error fetching data:', err);
             $(".loader").html("<h1>An Error Occured</h1>");
         });
+
+
 }
 

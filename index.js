@@ -22,7 +22,7 @@ app.get('/api/users', async (req, res) => {
 
 app.post('/api/update-balance', async (req, res) => {
   console.log(req.body);
-  const { userId, amount } = req.body;
+  const { userId, amount, title, description, pay_type } = req.body;
 
   try {
     const user = await User.findById(userId);
@@ -31,16 +31,55 @@ app.post('/api/update-balance', async (req, res) => {
     }
 
     user.currentBalance += amount;
-    user.upiBalance += amount;
-    user.transactions.push({ amount });
+    if (pay_type == "UPI") user.upiBalance += amount; else user.cashBalance += amount;
+    user.transactions.push({ amount, title, description, pay_type });
     await user.save();
 
     res.json({ success: true, user });
   } catch (err) {
+    console.log(err);
     res.status(500).send(err);
   }
 });
-;
+
+app.post('/api/update-dues', async (req, res) => {
+  console.log(req.body);
+  const { userId, amount, title, description, pay_type } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // amount *= -1;
+
+    user.currentBalance += amount;
+
+    if (pay_type == "UPI") user.upiBalance += amount; else user.cashBalance += amount;
+    user.transactions.push({ amount, title, description, pay_type });
+
+    var flag = 0;
+    for (var person of user.dues) {
+      if (person.name.toLowerCase() == title.toLowerCase()) {
+        flag = 1;
+        person.balance += amount;
+        person.transactions.push({ amount, description, pay_type });
+        break;
+      }
+    }
+    if (flag == 0) {
+      user.dues.push({ name: title, balance: amount, transactions: { amount, description, pay_type } });
+    }
+    await user.save();
+
+    res.json({ success: true, user });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 
 
 
@@ -75,9 +114,25 @@ const UserSchema = new mongoose.Schema({
     {
       amount: Number,
       date: { type: Date, default: Date.now },
-      title: { type: String, default: "Daily Payments" }
+      title: { type: String, default: "Daily Payments" },
+      description: String,
+      pay_type: String,
+    }],
+  dues: [
+    {
+      name: String,
+      balance: Number,
+      transactions: [
+        {
+          amount: Number,
+          date: { type: Date, default: Date.now },
+          title: { type: String, default: "Person1" },
+          description: { type: String, default: "" },
+          pay_type: String,
+        }],
     }
   ]
+
 
 });
 

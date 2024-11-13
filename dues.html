@@ -7,44 +7,32 @@
     <title>SpendWise</title>
 
     <link rel="stylesheet" href="styles/lib.css">
-    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/dues.css">
     <!-- <script src="index.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- jQuery Modal
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
-    <link rel="stylesheet" href="styles/history.css">
-    <script src="scripts/history.js"></script>
+
+    <script src="scripts/dues.js"></script>
 </head>
 
 <body>
-
-    <div class="wrapper">
-
+    <div class="loader"></div>
+    <div class="wrapper default-1">
 
     </div>
 
-
-
-
-
-
-
-
-
-
-    <div class="loader"></div>
-
     <div class="b-menu poppins">
-        <div class="home btn-1 ">
-            <i data-lucide="house"></i>
+        <div class="history btn-1 ">
+            <i data-lucide="history"></i>
         </div>
         <div class="add-trans">
             <i data-lucide="plus"></i>
         </div>
-        <div class="dues btn-1 ">
-            <i data-lucide="wallet"></i>
+        <div class="home btn-1 ">
+            <i data-lucide="house"></i>
         </div>
     </div>
 
@@ -57,7 +45,16 @@
         </div>
         <form id="add-trans-form">
             <div>
+                <textarea id="title" placeholder="Name of person"></textarea>
                 <input type="number" placeholder="0.00" min="0.01" step="0.01" required>
+
+                <textarea id="desc" placeholder="Enter description..."></textarea>
+            </div>
+            <div class="paymethod">
+                <label for="options">Payment Mode:</label> <select id="options" name="options" required>
+                    <option value="UPI" selected>UPI</option>
+                    <option value="Cash">Cash</option>
+                </select>
             </div>
             <div class="btns-2">
                 <button type="reset" class="cancel">Cancel</button>
