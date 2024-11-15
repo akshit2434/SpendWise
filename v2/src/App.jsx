@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import './styles/lib.css';
 
 function App() {
-    const API_URL = 'http://192.168.29.4:3000';
+    const API_URL = 'http://192.168.95.69:3000';
 
 
     const [user, setUser] = useState(null);

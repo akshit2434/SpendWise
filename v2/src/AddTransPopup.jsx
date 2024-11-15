@@ -3,7 +3,7 @@ import { X, Plus, Minus } from 'lucide-react';
 import $ from 'jquery';
 
 function AddTransPopup({ userId, fetchUserData }) {
-    const API_URL = 'http://192.168.29.4:3000';
+    const API_URL = 'http://192.168.95.69:3000';
     useEffect(() => {
         $(".add-trans").click(function () {
             $(".popup-overlay").fadeIn("fast");

@@ -24,7 +24,7 @@ export default function HistoryPage({ transactions, userId, fetchUserData }) {
         var sign = (color == "green") ? "+" : "-";
         var title = trans.title;
         var date = formatDate(trans.date);
-        elements.push(<div className="transaction frosted white-1">
+        elements.push(<div key={trans._id} className="transaction frosted white-1">
             <span className={`amount ${color}-1`}>
                 {sign}₹{amount}
             </span>
@@ -37,7 +37,7 @@ export default function HistoryPage({ transactions, userId, fetchUserData }) {
         );
     }
     if (count == 0) {
-        elements.push(<h1>No Dues...</h1>);
+        elements.push(<h1 key="0">No Transactions...</h1>);
     }
     return (
         <div className="wrapper wrapper_dues">

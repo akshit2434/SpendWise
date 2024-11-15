@@ -14,7 +14,7 @@ export default function DuesPage({ dues, userId, fetchUserData }) {
         if (amount < 0) amount *= -1;
         var sign = (color == "green") ? "Take " : "Give ";
         var title = person.name;
-        people.push(<div class="transaction frosted white-1" key={person._id}><span class={`amount ${color}-1`}>₹{amount}</span><i data-lucide='circle-user-round'></i><div><span class='name'>{title}</span></div></div>);
+        people.push(<div className="transaction frosted white-1" key={person._id}><span className={`amount ${color}-1`}>{sign} ₹{amount}</span><i data-lucide='circle-user-round'></i><div><span className='name'>{title}</span></div></div>);
     }
     if (count == 0) {
         people.push(<h1>No Dues...</h1>);
