@@ -37,14 +37,14 @@ function HomePage({ user, fetchUserData }) {
         <h1 className="intro white-1">Hello, <span className="userNameJS">{user.name}</span>!</h1>
         <div className="frosted card balancecard host-grotesk wavebg-outer waveWrapper-outer">
           <h2 className="grey-1">Today's Spendings</h2>
-          <h1 className="curbal green-1 balanceJS">₹{user.todaySpendings}</h1>
+          <h1 className="curbal green-1 balanceJS">₹{parseInt(user.todaySpendings)}</h1>
           <div className="daily-budget line-card frosted">
             <h2>Today's Budget</h2>
-            <h3 className="daily-budgetJS">₹{user.weekdayBudget}</h3>
+            <h3 className="daily-budgetJS">₹{parseInt(user.weekdayBudget)}</h3>
           </div>
           <div className="weekly-avg line-card frosted">
             <h2>Avg Daily Spending</h2>
-            <h3 className="balanceJS">₹{user.todaySpendings}</h3>
+            <h3 className="balanceJS">₹{parseInt(user.todaySpendings)}</h3>
           </div>
         </div>
 

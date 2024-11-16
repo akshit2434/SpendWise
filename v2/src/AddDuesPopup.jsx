@@ -3,7 +3,7 @@ import { X, Plus, Minus } from 'lucide-react';
 import $ from 'jquery';
 
 function AddDuesPopup({ userId, fetchUserData }) {
-    const API_URL = 'http://192.168.95.69:3000';
+    const API_URL = 'http://192.168.145.176:3000';
 
     useEffect(() => {
         $(".add-trans").click(function () {
