@@ -37,7 +37,7 @@ function HomePage({ user, fetchUserData }) {
         <h1 className="intro white-1">Hello, <span className="userNameJS">{user.name}</span>!</h1>
         <div className="frosted card balancecard host-grotesk wavebg-outer waveWrapper-outer">
           <h2 className="grey-1">Today's Spendings</h2>
-          <h1 className="curbal green-1 balanceJS">₹{parseInt(user.todaySpendings)}</h1>
+          <h1 className={`curbal ${parseInt(user.todaySpendings) >= parseInt(user.weekdayBudget) ? "red" : "green"}-1 balanceJS`}>₹{parseInt(user.todaySpendings)}</h1>
           <div className="daily-budget line-card frosted">
             <h2>Today's Budget</h2>
             <h3 className="daily-budgetJS">₹{parseInt(user.weekdayBudget)}</h3>
@@ -49,7 +49,7 @@ function HomePage({ user, fetchUserData }) {
         </div>
 
         <div className="frosted card quote-box">
-          <h2 className="budget grey-3 prog"><span className="monthp red-1">{perBudget}%</span> of budget used.</h2>
+          <h2 className="budget grey-3 prog"><span className={`monthp ${perBudget >= perMonth ? "red" : "green"}-1`}>{perBudget}%</span> of monthly budget used.</h2>
           <h2 className="month grey-3 prog"><span>{perMonth}%</span> of the month over.</h2>
           <div className="card quote frosted">
             <span className="text" id="auto-quote">"A rupee saved is a rupee earned."</span>

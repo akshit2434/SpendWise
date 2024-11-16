@@ -17,7 +17,7 @@ export default function DuesPage({ dues, userId, fetchUserData }) {
         people.push(<div className="transaction frosted white-1" key={person._id}><span className={`amount ${color}-1`}>{sign} ₹{amount}</span><i data-lucide='circle-user-round'></i><div><span className='name'>{title}</span></div></div>);
     }
     if (count == 0) {
-        people.push(<h1>No Dues...</h1>);
+        people.push(<h1 key={'1'}>No Dues...</h1>);
     }
     return (
         <div className="wrapper wrapper_dues">
